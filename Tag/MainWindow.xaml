@@ -1,0 +1,71 @@
+﻿<Window x:Class="Tag.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Tag.ViewModels"
+        xmlns:local="clr-namespace:Tag"
+        mc:Ignorable="d"
+        Title="Tag" Height="350" Width="535" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Calendar x:Name="ScheduleCalendar" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" SelectedDatesChanged="ScheduleCalendar_SelectedDatesChanged"/>
+        <ListBox x:Name="ScheduleDayList" HorizontalAlignment="Left" Height="105" Margin="10,192,0,0" VerticalAlignment="Top" Width="179" SelectionChanged="ScheduleDayList_SelectionChanged" DisplayMemberPath="ScheduleDateTitle">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add" Click="AddItem_Click"/>
+                    <MenuItem Header="Delete" Click="DeleteItem_Click"/>
+                    <MenuItem Header="Copy" Click="CopyItem_Click"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+        <TextBox x:Name="ScheduleDayItemText" HorizontalAlignment="Left" Height="23" Margin="202,24,0,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top" Width="252" TextChanged="ScheduleDayItemText_TextChanged" LostFocus="ScheduleDayItemText_LostFocus">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="C_Copy" Click="ScheduleDayItemCCopy_Click"/>
+                    <MenuItem Header="C_Paste" Click="ScheduleDayItemCPaste_Click"/>
+                    <MenuItem Header="Paste" Click="ScheduleDayItemPaste_Click"/>
+                    <MenuItem Header="Clear" Click="ScheduleDayItemClear_Click"/>
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+        <TextBox x:Name="ScheduleText" HorizontalAlignment="Left" Height="245" Margin="202,52,0,0" TextWrapping="Wrap" Text="{Binding Contents}" VerticalAlignment="Top" Width="307" LostFocus="ScheduleText_LostFocus" AcceptsReturn="True">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="C_Copy" Click="ScheduleCCopy_Click"/>
+                    <MenuItem Header="C_Paste" Click="ScheduleCPaste_Click"/>
+                    <MenuItem Header="Paste" Click="SchedulePaste_Click"/>
+                    <MenuItem Header="Clear" Click="ScheduleClear_Click"/>
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+        <ComboBox x:Name="ScheduleDayPriorityCombo" HorizontalAlignment="Left" Margin="459,24,0,0" VerticalAlignment="Top" Width="50" Text="{Binding Priority}" DisplayMemberPath="Priority" IsEditable="True" LostFocus="ScheduleDayPriorityCombo_LostFocus"/>
+        <Menu HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="529">
+            <MenuItem Header="File(_F)">
+                <MenuItem Header="Open" />
+                <MenuItem Header="Save" />
+                <MenuItem Header="Close" />
+            </MenuItem>
+            <MenuItem Header="Edit(_E)">
+                <MenuItem Header="Undo" />
+                <MenuItem Header="Redo" />
+                <MenuItem Header="Cut" />
+                <MenuItem Header="Copy" />
+                <MenuItem Header="Paste" />
+                <MenuItem Header="Search" />
+            </MenuItem>
+            <MenuItem Header="Setting(_S)">
+                <MenuItem Header="BackGroudColor" />
+                <MenuItem Header="FixedFront" />
+            </MenuItem>
+            <MenuItem Header="Help(_H)">
+                <MenuItem Header="HowToUse" />
+                <MenuItem Header="License" />
+                <MenuItem Header="Version" />
+                <MenuItem Header="Update" />
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>
